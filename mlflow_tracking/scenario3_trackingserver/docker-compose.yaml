@@ -1,0 +1,35 @@
+services:
+  waitfordb:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - postgresql
+    command: postgresql:5432
+
+  db-server:
+    image: postgres:13.3
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: mlflow-db
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db_server:/var/lib/postgresql/data
+
+  tracking-server:
+    container_name: mlflow-tracking
+    build:
+      context: ./tracking-server
+      dockerfile: Dockerfile
+      args: 
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    environment:
+      DB_URI: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql:5432/mlflow-db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./tracking_server:/var
