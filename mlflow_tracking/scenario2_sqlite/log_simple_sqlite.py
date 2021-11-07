@@ -1,15 +1,21 @@
 # %% 手順2 トラッキングサーバの構築
 import mlflow
 import configparser
-from mlflow import tracking
+import sqlite3
+import os
 cfg = configparser.ConfigParser()
 cfg.read('./config.ini', encoding='utf-8')
 # 各種パスを指定
-TRACKING_URI = cfg['Path']['db_path']
+DB_PATH = cfg['Path']['db_path']
 REGISTRY_URI = cfg['Path']['registry_uri']
 
+# バックエンド用DBを作成
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)  # 親ディレクトリなければ作成
+conn = sqlite3.connect(DB_PATH)  # バックエンド用DBを作成
+
 # トラッキングサーバの場所を指定
-mlflow.set_tracking_uri(TRACKING_URI)
+tracking_uri = f'sqlite:///{DB_PATH}'
+mlflow.set_tracking_uri(tracking_uri)
 # レジストリサーバの場所を指定
 mlflow.set_registry_uri(REGISTRY_URI)
 

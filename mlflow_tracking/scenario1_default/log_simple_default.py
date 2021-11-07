@@ -1,4 +1,4 @@
-# %% デフォルト位置に記録
+# %% 手順4: 実験結果の記録（デフォルト設定）
 import mlflow
 
 with mlflow.start_run():
