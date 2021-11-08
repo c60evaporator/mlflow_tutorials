@@ -2,34 +2,47 @@ services:
   waitfordb:
     image: dadarek/wait-for-dependencies
     depends_on:
-      - postgresql
-    command: postgresql:5432
+      - db-server
+    command: db-server:5432
 
   db-server:
     image: postgres:13.3
-    container_name: postgres-db
+    container_name: ${DB_HOST}
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: mlflow-db
+      POSTGRES_DB: ${DB_NAME}
       TZ: "Asia/Tokyo"
     ports:
       - 5432:5432
     volumes:
-      - ./db_server:/var/lib/postgresql/data
+      - $PWD/db_server:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 81:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    depends_on:
+      - db-server
 
   tracking-server:
     container_name: mlflow-tracking
     build:
-      context: ./tracking-server
+      context: ./tracking_server
       dockerfile: Dockerfile
-      args: 
+      args:
         - POSTGRES_USER=${POSTGRES_USER}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    environment:
-      DB_URI: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql:5432/mlflow-db
+        - DB_HOST=${DB_HOST}
+        - DB_NAME=${DB_NAME}
+    image: mlflow-tracking:1.0
     ports:
       - "5000:5000"
-    volumes:
-      - ./tracking_server:/var
+    depends_on:
+      - db-server
+      - waitfordb
