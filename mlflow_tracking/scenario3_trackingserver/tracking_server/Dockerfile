@@ -1,10 +1,25 @@
-FROM python:3.9.7-buster
+# builder for installing python packages
+FROM python:3.9.7-buster as builder
 
 # install mlflow and psycopg2
 RUN pip install \
     mlflow \
     psycopg2
-    
+
+# main image
+FROM python:3.9.7-slim-buster
+
+# copy python packages
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+# copy mlflow package
+COPY --from=builder /usr/local/bin/mlflow /usr/local/bin/mlflow
+# copy linux packages for postgre
+COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+COPY --from=builder /lib/x86_64-linux-gnu /lib/x86_64-linux-gnu
+# copy gunicorn package
+COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
+
+# make directory for artifacts
 RUN mkdir -p mlflow/artifacts
 # open port 5000
 EXPOSE 5000
