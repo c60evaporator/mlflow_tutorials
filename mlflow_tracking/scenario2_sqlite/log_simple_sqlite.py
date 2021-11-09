@@ -24,11 +24,13 @@ mlflow.set_registry_uri(REGISTRY_URI)
 ARTIFACT_LOCATION = cfg['Path']['artifact_location']
 # Experimentの生成
 EXPERIMENT_NAME = 'experiment_simple'
-experiment_id = mlflow.get_experiment_by_name(EXPERIMENT_NAME)  # 当該Experiment存在するとき、IDを取得
-if experiment_id is None:  # 当該Experiment存在しないとき、新たに作成
+experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
+if experiment is None:  # 当該Experiment存在しないとき、新たに作成
     experiment_id = mlflow.create_experiment(
                             name=EXPERIMENT_NAME,
                             artifact_location=ARTIFACT_LOCATION)
+else: # 当該Experiment存在するとき、IDを取得
+    experiment_id = experiment.experiment_id
 
 with mlflow.start_run(experiment_id=experiment_id):
     # 実験条件(Parameters)
