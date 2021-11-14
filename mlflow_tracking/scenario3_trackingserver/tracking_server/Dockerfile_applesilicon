@@ -21,7 +21,7 @@ COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 
 # make directory for artifacts
 RUN mkdir -p mlflow/artifacts
-# open port 5000
+# open port 5001
 EXPOSE 5001
 
 # set environment variables
