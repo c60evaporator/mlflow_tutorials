@@ -33,7 +33,7 @@ services:
     container_name: mlflow-tracking
     build:
       context: ./tracking_server
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_applesilicon
       args:
         - POSTGRES_USER=${POSTGRES_USER}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -43,7 +43,7 @@ services:
     image: mlflow-tracking:1.0
     restart: always
     ports:
-      - "5000:5000"
+      - "5001:5001"
     depends_on:
       - db-server
       - waitfordb
