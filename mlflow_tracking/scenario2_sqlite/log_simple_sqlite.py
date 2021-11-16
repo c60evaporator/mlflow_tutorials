@@ -20,7 +20,7 @@ mlflow.set_tracking_uri(tracking_uri)
 mlflow.set_registry_uri(REGISTRY_URI)
 
 # %% 手順3 エクスペリメントの作成
-# Artifactストレージの場所を指定（Experimentの生成が必要）
+# Artifactストレージの場所を指定
 ARTIFACT_LOCATION = cfg['Path']['artifact_location']
 # Experimentの生成
 EXPERIMENT_NAME = 'experiment_simple'
