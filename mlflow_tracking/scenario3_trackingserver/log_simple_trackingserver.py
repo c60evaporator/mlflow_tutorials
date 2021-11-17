@@ -12,15 +12,12 @@ TRACKING_URI = 'http://127.0.0.1:5001'
 mlflow.set_tracking_uri(TRACKING_URI)
 
 # %% 手順3 エクスペリメントの作成
-# Artifactストレージの場所を指定
-ARTIFACT_LOCATION = cfg['Path']['artifact_location']
 # Experimentの生成 (artifact_locationはDockerfileのコマンドで指定しているので不要)
 EXPERIMENT_NAME = 'experiment_simple'
 experiment = mlflow.get_experiment_by_name(EXPERIMENT_NAME)
 if experiment is None:  # 当該Experiment存在しないとき、新たに作成
     experiment_id = mlflow.create_experiment(
-                            name=EXPERIMENT_NAME,
-                            artifact_location=ARTIFACT_LOCATION)
+                            name=EXPERIMENT_NAME)
 else: # 当該Experiment存在するとき、IDを取得
     experiment_id = experiment.experiment_id
 

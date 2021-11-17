@@ -3,4 +3,5 @@ _tracking_uri
 _registry_uri
 _artifact_location
 config.ini
-mlflow_tracking/scenario3_trackingserver/db_server/
+db_server
+ftp
