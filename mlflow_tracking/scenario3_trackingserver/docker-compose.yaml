@@ -17,6 +17,8 @@ services:
       TZ: "Asia/Tokyo"
     ports:
       - 5432:5432
+    volumes:
+      - $PWD/db_server:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -39,11 +41,29 @@ services:
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         - DB_HOST=${DB_HOST}
         - DB_NAME=${DB_NAME}
-        - DEFAULT_ARTIFACT_ROOT=${DEFAULT_ARTIFACT_ROOT}
+        - DEFAULT_ARTIFACT_ROOT=ftp://${FTP_USER_NAME}:${FTP_USER_PASS}@localhost/artifact_location
     image: mlflow-tracking:1.0
     restart: always
     ports:
       - "5000:5000"
+    extra_hosts:
+      - "localhost:${HOST_IP}"
     depends_on:
       - db-server
       - waitfordb
+
+  ftp-server:
+    image: stilliard/pure-ftpd:latest
+    container_name: ftp-server
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - $PWD/ftp/data:/home/ftpusers
+    environment:
+      - PUBLICHOST=localhost
+      - FTP_USER_NAME=${FTP_USER_NAME}
+      - FTP_USER_PASS=${FTP_USER_PASS}
+      - FTP_USER_HOME=/home/ftpusers
+      - ADDED_FLAGS="--tls=2"
+    restart: always

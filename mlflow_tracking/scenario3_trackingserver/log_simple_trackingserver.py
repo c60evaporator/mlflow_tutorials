@@ -6,7 +6,7 @@ from mlflow.tracking import artifact_utils
 cfg = configparser.ConfigParser()
 cfg.read('./config.ini', encoding='utf-8')
 # 各種パスを指定
-TRACKING_URI = 'http://127.0.0.1:5001'
+TRACKING_URI = cfg['Path']['tracking_uri']
 
 # トラッキングサーバの場所を指定
 mlflow.set_tracking_uri(TRACKING_URI)
