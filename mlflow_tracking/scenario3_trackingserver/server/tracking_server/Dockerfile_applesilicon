@@ -13,7 +13,7 @@ FROM python:3.9.7-slim-buster
 COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 # copy mlflow package
 COPY --from=builder /usr/local/bin/mlflow /usr/local/bin/mlflow
-# copy linux packages for postgre
+# copy linux packages for postgres
 COPY --from=builder /usr/lib/aarch64-linux-gnu /usr/lib/aarch64-linux-gnu
 COPY --from=builder /lib/aarch64-linux-gnu /lib/aarch64-linux-gnu
 # copy gunicorn package

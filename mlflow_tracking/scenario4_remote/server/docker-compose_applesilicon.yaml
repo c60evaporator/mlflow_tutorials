@@ -1,0 +1,59 @@
+services:
+  db-server:
+    image: mysql:5.7
+    container_name: ${DB_HOST}
+    platform: 'linux/amd64'
+    restart: always
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+    volumes:
+      - $PWD/db_server:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    depends_on:
+      - db-server
+    ports: 
+      - "8080:8080"
+
+  tracking-server:
+    container_name: mlflow-tracking
+    build:
+      context: ./tracking_server
+      dockerfile: Dockerfile_applesilicon
+      args:
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - DB_HOST=${DB_HOST}
+        - DB_NAME=${DB_NAME}
+        - DEFAULT_ARTIFACT_ROOT=ftp://${FTP_USER_NAME}:${FTP_USER_PASS}@${HOST_IP}/artifact_location
+    image: mlflow-tracking:1.0
+    restart: always
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db-server
+
+  ftp-server:
+    image: stilliard/pure-ftpd:latest
+    container_name: ftp-server
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - $PWD/ftp/data:/home/ftpusers
+    environment:
+      - PUBLICHOST=localhost
+      - FTP_USER_NAME=${FTP_USER_NAME}
+      - FTP_USER_PASS=${FTP_USER_PASS}
+      - FTP_USER_HOME=/home/ftpusers
+      - ADDED_FLAGS="--tls=2"
+    restart: always
