@@ -4,7 +4,8 @@ FROM python:3.9.7-buster as builder
 # install mlflow and mysqlclient
 RUN pip install \
     mlflow \
-    mysqlclient
+    mysqlclient \
+    boto3
 
 # main image
 FROM python:3.9.7-slim-buster

@@ -34,26 +34,10 @@ services:
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         - DB_HOST=${DB_HOST}
         - DB_NAME=${DB_NAME}
-        - DEFAULT_ARTIFACT_ROOT=ftp://${FTP_USER_NAME}:${FTP_USER_PASS}@${HOST_IP}/artifact_location
+        - DEFAULT_ARTIFACT_ROOT=${DEFAULT_ARTIFACT_ROOT}
     image: mlflow-tracking:1.0
     restart: always
     ports:
       - "5001:5001"
     depends_on:
       - db-server
-
-  ftp-server:
-    image: stilliard/pure-ftpd:latest
-    container_name: ftp-server
-    ports:
-      - "21:21"
-      - "30000-30009:30000-30009"
-    volumes:
-      - $PWD/ftp/data:/home/ftpusers
-    environment:
-      - PUBLICHOST=localhost
-      - FTP_USER_NAME=${FTP_USER_NAME}
-      - FTP_USER_PASS=${FTP_USER_PASS}
-      - FTP_USER_HOME=/home/ftpusers
-      - ADDED_FLAGS="--tls=2"
-    restart: always
