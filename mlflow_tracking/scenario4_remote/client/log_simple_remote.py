@@ -1,8 +1,6 @@
 # %% 手順2 トラッキングサーバの構築
 import mlflow
 import configparser
-from mlflow import tracking
-from mlflow.tracking import artifact_utils
 cfg = configparser.ConfigParser()
 cfg.read('./config.ini', encoding='utf-8')
 # 各種パスを指定

@@ -1,17 +1,12 @@
 # %% 手順2 トラッキングサーバの構築
 import mlflow
 import configparser
-from mlflow import tracking
 cfg = configparser.ConfigParser()
 cfg.read('./config.ini', encoding='utf-8')
 # 各種パスを指定
 TRACKING_URI = cfg['Path']['tracking_uri']
-REGISTRY_URI = cfg['Path']['registry_uri']
-
 # トラッキングサーバの場所を指定
 mlflow.set_tracking_uri(TRACKING_URI)
-# レジストリサーバの場所を指定
-mlflow.set_registry_uri(REGISTRY_URI)
 
 # %% 手順3 エクスペリメントの作成
 # Artifactストレージの場所を指定（Experimentの生成が必要）
@@ -26,6 +21,7 @@ if experiment is None:  # 当該Experiment存在しないとき、新たに作�
 else: # 当該Experiment存在するとき、IDを取得
     experiment_id = experiment.experiment_id
 
+# %% 手順4 実験結果のロギング
 with mlflow.start_run(experiment_id=experiment_id):
     # 実験条件(Parameters)
     mlflow.log_param("x", 1)
