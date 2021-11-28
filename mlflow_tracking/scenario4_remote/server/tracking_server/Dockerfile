@@ -15,7 +15,7 @@ COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python
 # copy mlflow package
 COPY --from=builder /usr/local/bin/mlflow /usr/local/bin/mlflow
 # copy linux packages for mysql
-COPY --from=builder /usr/lib/aarch64-linux-gnu /usr/lib/aarch64-linux-gnu
+COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 # copy gunicorn package
 COPY --from=builder /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 
