@@ -24,10 +24,10 @@ else: # 当該Experiment存在するとき、IDを取得
 # %% 手順4 実験結果のロギング
 with mlflow.start_run(experiment_id=experiment_id):
     # 実験条件(Parameters)
-    mlflow.log_param("x", 1)
+    mlflow.log_param('x', 1)
     # 評価指標(Metrics)
-    mlflow.log_metric("y", 2)
+    mlflow.log_metric('y', 2)
     # その他のデータ(Artifacts)
-    features = "rooms, zipcode, median_price, school_rating, transport"
-    mlflow.log_text(features, "features.txt")
+    features = 'rooms, zipcode, median_price, school_rating, transport'
+    mlflow.log_text(features, 'features.txt')
 # %%
