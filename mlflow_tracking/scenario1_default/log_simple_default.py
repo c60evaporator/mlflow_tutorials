@@ -21,3 +21,5 @@ print('Current model registry uri: {}'.format(mr_uri))
 # アーティファクトストレージの場所
 artifact_uri = mlflow.get_artifact_uri()
 print('Current artifact uri: {}'.format(artifact_uri))
+
+# %%
