@@ -1,7 +1,7 @@
 # %% 手順4: 実験結果の記録（デフォルト設定）
 import mlflow
 
-with mlflow.start_run():
+with mlflow.start_run() as run:
     # 実験条件(Parameters)
     mlflow.log_param('x', 1)
     # 評価指標(Metrics)

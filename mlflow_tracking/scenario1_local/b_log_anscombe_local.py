@@ -22,7 +22,7 @@ if experiment is None:  # 当該Experiment存在しないとき、新たに作�
 else: # 当該Experiment存在するとき、IDを取得
     experiment_id = experiment.experiment_id
 
-# %% ロギングの実行
+# %% 手順4 実験結果のロギング
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -31,7 +31,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# 次数を指定して
+# 次数を指定して多項式回帰を実行するメソッド
 def poly_regression(n, X, y, ax):
     # テストデータ分割
     X_train, X_test, y_train, y_test = train_test_split(X, y, 
@@ -57,10 +57,10 @@ def poly_regression(n, X, y, ax):
     ax.plot(X_view.ravel(), y_pred_view, c='red')  # 回帰線をプロット
     ax.set_title(f'Degree={n}')
 
-# 次数を変えてスコアを評価
+# 次数を変えてスコアを評価するメソッド
 def validate_degrees(data, dataset_name):
     # Runを開始
-    with mlflow.start_run(experiment_id=experiment_id):
+    with mlflow.start_run(experiment_id=experiment_id) as run:
         # データセットを選択
         data_selected = data[data['dataset'] == dataset_name]
         X = data_selected['x'].to_numpy().reshape(len(data_selected), 1)
@@ -76,6 +76,7 @@ def validate_degrees(data, dataset_name):
         mlflow.log_figure(fig, f'figure_{dataset_name}.png')
         plt.show()
 
+# 全てのデータセットでスコアの評価を実行
 data = sns.load_dataset('anscombe')
 # データセット1の評価
 validate_degrees(data, 'I')

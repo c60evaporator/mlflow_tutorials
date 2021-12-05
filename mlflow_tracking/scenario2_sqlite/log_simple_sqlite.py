@@ -30,7 +30,7 @@ else: # 当該Experiment存在するとき、IDを取得
     experiment_id = experiment.experiment_id
 
 # %% 手順4 実験結果のロギング
-with mlflow.start_run(experiment_id=experiment_id):
+with mlflow.start_run(experiment_id=experiment_id) as run:
     # 実験条件(Parameters)
     mlflow.log_param('x', 1)
     # 評価指標(Metrics)
