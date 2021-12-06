@@ -12,15 +12,19 @@
 
 ・シナリオ1構成図
 ![scenario_1.png](https://mlflow.org/docs/latest/_images/scenario_1.png)
+
 ・シナリオ2構成図
 ![scenario_2.png](https://mlflow.org/docs/latest/_images/scenario_2.png)
+
 ・シナリオ3構成図
-![scenario3](https://user-images.githubusercontent.com/59557625/144874201-1a912657-172b-46e5-ae2d-d8e8a3f2f35e.png)
+
+　![image](https://user-images.githubusercontent.com/59557625/144874438-d32afab5-d436-4099-84f4-512c73ff5c47.png)
+
 ・シナリオ4構成図
 
-サンプルコードは以下のようなフォルダ構成となっています。
+　![image](https://user-images.githubusercontent.com/59557625/144874860-69dcfbdb-3d73-442d-beaf-ac1744c122a7.png)
 
-シナリオ3、シナリオ4では、サーバ側のDocker Composeを`docker-compose run`で立ち上げた状態で、クライアント側のコードを実行してください
+サンプルコードは以下のようなフォルダ構成となっています。
 
 ||シナリオ1<br>(デフォルト設定)|シナリオ1<br>(別フォルダ指定)|シナリオ2|シナリオ3|シナリオ4|
 |---|---|---|---|---|---|
@@ -29,3 +33,5 @@
 |コード実行例<br>（ロギングのみ）|||||
 |コード実行例<br>（多項式回帰の次数）|||||
 |コード実行例<br>（パラメータチューニング）|||||
+
+シナリオ3、シナリオ4では、サーバ側のDocker Composeを`docker-compose run`で立ち上げた状態で、クライアント側のコードを実行してください
