@@ -13,8 +13,8 @@
 
 ||シナリオ1<br>(デフォルト設定)|シナリオ1<br>(別フォルダ指定)|シナリオ2|シナリオ3|シナリオ4|
 |---|---|---|---|---|---|
-|サーバ側のフォルダ|[/mlflow_tracking/scenario1_default]()|[/mlflow_tracking/scenario1_local]()|[/mlflow_tracking/scenario2_sqlite]()|[/mlflow_tracking/scenario3_trackingserver/server]()|[/mlflow_tracking/scenario4_remote/server]()|
-|クライアント側のフォルダ|サーバ側と同じ|サーバ側と同じ|サーバ側と同じ|[/mlflow_tracking/scenario3_trackingserver/client]()|[/mlflow_tracking/scenario4_remote/client]()|
+|サーバ側のフォルダ|[/mlflow_tracking /scenario1_default](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario1_default)|[/mlflow_tracking /scenario1_local](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario1_local)|[/mlflow_tracking /scenario2_sqlite](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario2_sqlite)|[/mlflow_tracking /scenario3_trackingserver /server](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario3_trackingserver/server)|[/mlflow_tracking /scenario4_remote /server](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario4_remote/server)|
+|クライアント側のフォルダ　　　　　　　|サーバ側と同じ|サーバ側と同じ|サーバ側と同じ|[/mlflow_tracking /scenario3_trackingserver /client](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario3_trackingserver/client)|[/mlflow_tracking /scenario4_remote /client](https://github.com/c60evaporator/mlflow_tutorials/tree/master/mlflow_tracking/scenario4_remote/client)|
 |コード実行例<br>（ロギングのみ）|||||
 |コード実行例<br>（多項式回帰の次数）|||||
 |コード実行例<br>（パラメータチューニング）|||||
