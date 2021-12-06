@@ -1,15 +1,26 @@
 # mlflow_tutorials
 [MLflow公式ドキュメント](https://mlflow.org/docs/latest/tracking.html#concepts)の**4種類のシナリオ**を再現するサンプルコードです
 
-|シナリオ|英名|トラッキングサーバ|バックエンド|アーティファクトストレージ|
+詳細は[こちらのQiita記事]()を参照ください
+
+|シナリオ　|英名|トラッキングサーバ|バックエンド|アーティファクトストレージ|
 |---|---|---|---|---|
 |1|MLflow on localhost|ローカルに自動生成|ローカルストレージ|ローカルストレージ|
 |2|MLFlow on localhost with SQLite|ローカルに自動生成|ローカルDB|ローカルストレージ|
 |3|MLflow on localhost with Tracking Server|ローカルに手動ホスティング|ローカルDB or ストレージ|ローカルストレージ|
 |4|MLflow with remote Tracking Server, backend and artifact stores|リモートサーバ|リモートDB|リモートストレージ|
 
-以下のようなフォルダ構成となっています。
+・シナリオ1構成図
+![scenario_1.png](https://mlflow.org/docs/latest/_images/scenario_1.png)
+・シナリオ2構成図
+![scenario_2.png](https://mlflow.org/docs/latest/_images/scenario_2.png)
+・シナリオ3構成図
+![scenario3](https://user-images.githubusercontent.com/59557625/144874201-1a912657-172b-46e5-ae2d-d8e8a3f2f35e.png)
+・シナリオ4構成図
 
+サンプルコードは以下のようなフォルダ構成となっています。
+
+シナリオ3、シナリオ4では、サーバ側のDocker Composeを`docker-compose run`で立ち上げた状態で、クライアント側のコードを実行してください
 
 ||シナリオ1<br>(デフォルト設定)|シナリオ1<br>(別フォルダ指定)|シナリオ2|シナリオ3|シナリオ4|
 |---|---|---|---|---|---|
