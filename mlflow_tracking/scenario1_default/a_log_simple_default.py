@@ -1,4 +1,4 @@
-# %% 手順4: 実験結果の記録（デフォルト設定）
+# %% 手順4: 実験結果のロギング（デフォルト設定）
 import mlflow
 
 with mlflow.start_run() as run:
