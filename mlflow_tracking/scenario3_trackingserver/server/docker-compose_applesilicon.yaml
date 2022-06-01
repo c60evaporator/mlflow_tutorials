@@ -3,13 +3,11 @@ services:
     image: dadarek/wait-for-dependencies
     depends_on:
       - db-server
-    restart: always
     command: db-server:5432
 
   db-server:
     image: postgres:13.3
     container_name: ${DB_HOST}
-    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -22,7 +20,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    restart: always
     ports:
       - 81:80
     environment:
@@ -43,7 +40,6 @@ services:
         - DB_NAME=${DB_NAME}
         - DEFAULT_ARTIFACT_ROOT=ftp://${FTP_USER_NAME}:${FTP_USER_PASS}@${HOST_IP}/artifact_location
     image: mlflow-tracking:1.0
-    restart: always
     ports:
       - "5001:5001"
     depends_on:
@@ -64,4 +60,3 @@ services:
       - FTP_USER_PASS=${FTP_USER_PASS}
       - FTP_USER_HOME=/home/ftpusers
       - ADDED_FLAGS="--tls=2"
-    restart: always
