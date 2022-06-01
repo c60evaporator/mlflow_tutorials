@@ -13,7 +13,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - $PWD/db_server:/var/lib/mysql
+      - ./db_server:/var/lib/mysql
 
   adminer:
     image: adminer
